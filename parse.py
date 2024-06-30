@@ -85,5 +85,5 @@ if __name__ == '__main__':
     targetDataFrame['Index'] = pd.RangeIndex(start=1, stop=len(df) + 1, step=1)
 
     targetDataFrame.to_excel(outputFilePath + '.xlsx', index=False)
-    targetDataFrame.to_csv(outputFileName + '.csv', index=False)
+    targetDataFrame.to_csv(outputFilePath + '.csv', index=False)
     print('Done')
