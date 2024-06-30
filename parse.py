@@ -3,11 +3,14 @@ import pandas as pd
 import re
 
 basePath = os.getcwd()
-folderName = 'data'
-fileName = 'miji_signal_record.xlsx'
-filePath = os.path.join(basePath, folderName, fileName)
+inputFolderName = 'data'
+outputFolderName = 'output'
+inputFileName = 'miji_signal_record.xlsx'
+outputFileName = 'result'
+inputFilePath = os.path.join(basePath, inputFolderName, inputFileName)
+outputFilePath = os.path.join(basePath, outputFolderName, outputFileName)
 print("Current Working Directory:", basePath)
-print("File Path:", filePath)
+print("File Path:", inputFilePath)
 
 
 # Define a function to extract the patterns
@@ -43,7 +46,7 @@ def combine_lists(row, columns):
 
 
 if __name__ == '__main__':
-    df = pd.read_excel(filePath)
+    df = pd.read_excel(inputFilePath)
     df['Content'] = df['Content'].str.replace('@幂蜂群', '', regex=False)
     df['Content'] = df['Content'].str.replace('@deleted-role', '', regex=False)
     df['Content'] = df['Content'].str.replace('@everyone', '', regex=False)
@@ -81,6 +84,6 @@ if __name__ == '__main__':
     targetDataFrame['Ready'] = 'YES'
     targetDataFrame['Index'] = pd.RangeIndex(start=1, stop=len(df) + 1, step=1)
 
-    targetDataFrame.to_excel('resultTest.xlsx', index=False)
-    targetDataFrame.to_csv('resultTest.csv', index=False)
+    targetDataFrame.to_excel(outputFilePath + '.xlsx', index=False)
+    targetDataFrame.to_csv(outputFileName + '.csv', index=False)
     print('Done')
